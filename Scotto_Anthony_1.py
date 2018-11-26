@@ -1,24 +1,65 @@
 #!/usr/bin/env python3
+# Scotto_Anthony_1.py
+# Manipulation d'une liste
+# 26/11/2018
+# Scotto Anthony
+
+#modules
 import csv
 import statistics
 import signal
 import re
 
 
-#la liste
-liste = [1,2,3]
+#liste and variable
+liste = []
 End = False
 end = False
+csv_liste = 'liste.csv'
+
+
+#fct stop si ctrl C
 def ctrlC(sig, frame):
     fin()
 signal.signal(signal.SIGINT, ctrlC)
 
+# La petite fonction de fin des familles
 def fin():
     print("Au revoir")
     exit()
-    
+
 regx = re.compile('^[0-9]+')    
-    
+
+# Read in a file
+#def read(csv_liste):
+#    with open(csv_liste, 'r') as fcsv:
+ #       lecteur = csv.reader(fcsv, delimiter=';')
+  #      for exe in lecteur:
+ #           liste.append(exe)
+#    return liste
+#stockage de la liste dans le fichier csv
+#def write(msg):
+ #   with open(csv_liste, 'w') as f:
+  #      write = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+   #     write.writerow(msg)
+        
+# la fonction d'écriture du fichier        
+def write_file(msg):
+    with open(csv_liste, 'w') as csv_csv_liste:
+        write = csv.writer(csv_csv_liste, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        write.writerow(msg)
+
+# la fonction de lecture du fichier
+def read_file():
+ with open(csv_liste, 'r') as csv_csv_liste:
+        reader = csv.reader(csv_csv_liste)
+        for row in reader:
+            for i in range(len(row)):
+                if len(row) > 0:
+                    liste.append(row[i])
+
+read_file()
+
 #////////////////////////////////
 
 
@@ -110,6 +151,7 @@ while End is False:
 
 #Pour quitter
  elif zed ==("exit"):
+   write_file(liste)
    fin()
 
 
